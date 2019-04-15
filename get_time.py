@@ -82,4 +82,4 @@ def get_time(date, start):
 
 
 if __name__ == '__main__':
-    print(get_time('020210', '1840'))
+    print(get_time('120712', '1537'))
