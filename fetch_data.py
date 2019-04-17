@@ -16,8 +16,6 @@ def fetch_datas_for_download():
     sql = 'SELECT * FROM aaa.M where down = 0 and flag = 1'
     cursor.execute(sql)
     data = cursor.fetchone()
-    for a in data:
-        print(a)
     conn.close()
 
     return data
@@ -54,6 +52,7 @@ def download_not_complete(data_id):
     sql = f'UPDATE aaa.M SET down = 0 where id = {data_id}'
     cursor.execute(sql)
     conn.commit()
+    print(f'File {data_id} download failed, reload later! ')
     conn.close()
 
 
