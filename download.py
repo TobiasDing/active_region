@@ -6,6 +6,7 @@ from  fetch_data import download_complete, download_not_complete
 while True:
     try:
         data = fetch_datas_for_download()
+
         url = data[14]
         data_id = data[0]
 

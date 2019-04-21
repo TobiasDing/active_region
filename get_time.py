@@ -7,7 +7,7 @@ import pymysql
 
 def get_min(actual_min):
     if actual_min < 12:
-        min = '0'
+        min = '00'
     elif actual_min < 24 and actual_min >= 12:
         min = '12'
     elif actual_min < 36 and actual_min >= 24:

@@ -2,10 +2,10 @@ import pymysql
 import os
 
 conn = pymysql.connect(
-    host='localhost',
+    host='222.197.210.12',
     user='root',
     password='19950213',
-    database='flares',
+    database='aaa',
     charset='utf8',
     port=3306)
 
@@ -48,16 +48,17 @@ for file in files:
                 continue
 
             if location[3] == 'E':
-                lng = location[4:6]
-                if int(lng) > 30:
-                    continue
+                continue
+                # lng = location[4:6]
+                # if int(lng) > 30:
+                #     continue
             elif location[3] == 'W':
                 lng = '-' + location[4:6]
-                if int(lng) < -30:
+                if int(lng) < -60:
                     continue
 
             importance = line[59:60]
-            if importance is not 'C':
+            if importance is not 'M':
                 continue
             unknown1 = line[61:63]
             unknown2 = line[67:71]
@@ -77,7 +78,7 @@ for file in files:
             # print(unknown3)
             print('right')
             SQL = '''
-            INSERT INTO flares.C (date1, start, finish, peak, lat, lng, importance, unknown1, unknown2, imp_val, num, unknown3)
+            INSERT INTO aaa.ar_m (date1, start, finish, peak, lat, lng, importance, unknown1, unknown2, imp_val, num, unknown3)
             VALUES(%s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s); '''
             cursor.execute(SQL,(date1, start, finish, peak, lat, lng, importance, unknown1, unknown2, imp_val, num, unknown3))
             conn.commit()
