@@ -22,7 +22,7 @@ while True:
     print(f'Downloading from {url}')
     try:
 
-        tmpres = os.popen(f'export all_proxy=socks5://127.0.0.1:1086 ; curl -o /Volumes/MobileDisk1/flare/M/tar/{data_id}.tar {url}').readlines()
+        tmpres = os.popen(f'cd /Users/dingweiqi/Desktop ; wget -c {url}').readlines()
         print(tmpres)
 
 

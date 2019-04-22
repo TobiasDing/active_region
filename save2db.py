@@ -2,18 +2,18 @@ import pymysql
 import os
 
 conn = pymysql.connect(
-    host='222.197.210.12',
-    user='root',
-    password='19950213',
-    database='aaa',
-    charset='utf8',
-    port=3306)
+        host='188.131.245.201',
+        user='dingweiqi',
+        password='dingweiqi123',
+        database='aaa',
+        charset='utf8',
+        port=32001)
 
 cursor = conn.cursor()
 
 
 
-
+last_num = 0
 ar_list_dir = ('/Users/dingweiqi/Documents/ar_list/')
 
 files = os.listdir(ar_list_dir)
@@ -36,12 +36,12 @@ for file in files:
                 continue
             if location[0] == 'S':
                 lat = location[1:3]
-                if int(lat) > 30:
+                if int(lat) > 20:
                     continue
 
             elif location[0] == 'N':
                 lat = '-' + location[1:3]
-                if int(lat) < -30:
+                if int(lat) < -20:
                     continue
 
             else:
@@ -56,14 +56,19 @@ for file in files:
                 lng = '-' + location[4:6]
                 if int(lng) < -60:
                     continue
+                # if int(lng) > -20:
+                #     continue
 
             importance = line[59:60]
-            if importance is not 'M':
+            if importance is not 'X':
                 continue
             unknown1 = line[61:63]
             unknown2 = line[67:71]
             imp_val = line[72:79]
+
             num = line[80:85]
+            if num == last_num:
+                continue
             unknown3 = line[86:]
             # print(date1)
             # print(start)
@@ -77,10 +82,11 @@ for file in files:
             # print(num)
             # print(unknown3)
             print('right')
+            last_num = num
             SQL = '''
-            INSERT INTO aaa.ar_m (date1, start, finish, peak, lat, lng, importance, unknown1, unknown2, imp_val, num, unknown3)
-            VALUES(%s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s); '''
-            cursor.execute(SQL,(date1, start, finish, peak, lat, lng, importance, unknown1, unknown2, imp_val, num, unknown3))
+            INSERT INTO aaa.ar_x (date1, start, finish, peak, lat, lng, importance, unknown1, unknown2, imp_val, num, unknown3, flag, down)
+            VALUES(%s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s); '''
+            cursor.execute(SQL,(date1, start, finish, peak, lat, lng, importance, unknown1, unknown2, imp_val, num, unknown3, 0, 0))
             conn.commit()
             print(111)
 cursor.close()
