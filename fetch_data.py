@@ -1,8 +1,7 @@
 import pymysql
 
 
-def fetch_datas_for_download():
-    conn = pymysql.connect(
+conn1 = pymysql.connect(
         host='188.131.245.201',
         user='dingweiqi',
         password='dingweiqi123',
@@ -10,9 +9,12 @@ def fetch_datas_for_download():
         charset='utf8',
         port=32001)
 
+def fetch_datas_for_download(db):
+
+    conn = conn1
     cursor = conn.cursor()
 
-    sql = 'SELECT * FROM aaa.ar_m where down = 0 and flag = 1'
+    sql = f'SELECT * FROM {db} where down = 0 and flag = 1'
     cursor.execute(sql)
     data = cursor.fetchone()
 
