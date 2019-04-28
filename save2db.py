@@ -54,13 +54,13 @@ for file in files:
                 #     continue
             elif location[3] == 'W':
                 lng = '-' + location[4:6]
-                if int(lng) < -60:
+                if int(lng) < -50:
                     continue
                 # if int(lng) > -20:
                 #     continue
 
             importance = line[59:60]
-            if importance is not 'X':
+            if importance is not 'B':
                 continue
             unknown1 = line[61:63]
             unknown2 = line[67:71]
@@ -84,7 +84,7 @@ for file in files:
             print('right')
             last_num = num
             SQL = '''
-            INSERT INTO aaa.ar_x (date1, start, finish, peak, lat, lng, importance, unknown1, unknown2, imp_val, num, unknown3, flag, down)
+            INSERT INTO aaa.ar_none (date1, start, finish, peak, lat, lng, importance, unknown1, unknown2, imp_val, num, unknown3, flag, down)
             VALUES(%s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s); '''
             cursor.execute(SQL,(date1, start, finish, peak, lat, lng, importance, unknown1, unknown2, imp_val, num, unknown3, 0, 0))
             conn.commit()

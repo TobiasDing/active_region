@@ -164,16 +164,16 @@ def get_url(start, stop):
 if __name__ == '__main__':
     a = 1
     conn = pymysql.connect(
-        host='222.197.210.12',
-        user='root',
-        password='19950213',
+        host='188.131.245.201',
+        user='dingweiqi',
+        password='dingweiqi123',
         database='aaa',
         charset='utf8',
-        port=3306)
+        port=32001)
 
     cursor = conn.cursor()
 
-    sql = 'SELECT * FROM aaa.ar_m where flag = 0'
+    sql = 'SELECT * FROM aaa.ar_x where flag = 0'
     items = cursor.execute(sql)
     print(items)
     # print(items)
@@ -199,10 +199,10 @@ if __name__ == '__main__':
             print('get_url_failed')
             continue
         print(f"No.{id1} sample's url is {url}")
-        sql = f'update aaa.ar_m set url = \'{url}\' where id = {id1}'
+        sql = f'update aaa.ar_x set url = \'{url}\' where id = {id1}'
         cursor.execute(sql)
         conn.commit()
-        sql = f'update aaa.ar_m set flag = 1 where id = \'{id1}\''
+        sql = f'update aaa.ar_x set flag = 1 where id = \'{id1}\''
         cursor.execute(sql)
         print('Saved!')
         conn.commit()
